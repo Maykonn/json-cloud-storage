@@ -10,7 +10,6 @@ import (
 )
 
 func Save(s *session.Session, s3Config *s3Config, fileDir string) error {
-	// Open the file for use
 	file, err := os.Open(fileDir)
 	if err != nil {
 		return err

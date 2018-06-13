@@ -12,22 +12,16 @@ type s3Config struct {
 
 func NewS3Config(region string, bucket string) *s3Config {
 	return &s3Config{
-		region,
-		bucket,
+		region: region,
+		bucket: bucket,
 	}
 }
 
-func NewSession(s3Config *s3Config) *session.Session {
+func NewSession(s3Config *s3Config) (*session.Session, error) {
 	if s3Config.bucket == "" {
 		panic("Bucket cannot be blank")
 	}
 
 	config := &aws.Config{Region: aws.String(s3Config.region)}
-	s, err := session.NewSession(config)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return s
+	return session.NewSession(config)
 }
